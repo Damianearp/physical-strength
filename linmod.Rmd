@@ -1,7 +1,7 @@
 ---
 title: "Linear Model with prediction"
 author: "Damian Earp"
-date: "`r Sys.Date()`"
+date: "Summer 2024"
 output: html_document
 ---
 
