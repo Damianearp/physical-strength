@@ -20,3 +20,69 @@ require(knitr)
 require(foreign)
 data <- read.csv(file="https://onlinestatbook.com/case_studies_rvls/physical_strength/data.txt",sep="",header=TRUE)  
 ```
+
+Regression Model 1
+
+```{r}
+model1 <- lm(SIMS~ARM,data=data)
+plot(SIMS~ARM,data=data)
+title(main="Plot of SIMS vs ARM")
+abline(model1)
+summary.lm(model1)
+```
+
+```{r}
+new <- data.frame(ARM=88, GRIP=94)
+```
+
+```{r}
+predict(model1,new, interval= "prediction")
+```
+
+Regression Model 2
+
+```{r}
+model2 <- lm(SIMS~GRIP,data=data)
+plot(SIMS~GRIP,data=data)
+title(main="Plot of SIMS vs GRIP")
+abline(model2)
+summary.lm(model2)
+```
+
+```{r}
+predict(model2,new, interval= "prediction")
+```
+
+Regression Model 3
+
+```{r}
+model3 <- lm(SIMS~ARM+GRIP,data=data)
+plot(SIMS~ARM+GRIP,data=data)
+title(main="Plot of SIMS vs ARM+GRIP")
+abline(model3)
+summary.lm(model3)
+```
+
+```{r}
+predict(model3,new, interval= "prediction")
+```
+
+Comparing model 1 to model 3, 
+
+```{r}
+anova(model1, model3)
+```
+
+Comparing model 2 to model 3
+
+```{r}
+anova(model2, model3)
+```
+
+Informal comparison
+
+```{r}
+anova(model1, model2)
+```
+
+Looking at the models above, we can safely conclude that there is a difference in their RSS. Moving to model 1 we can see we have an RSS of 217, while Model 2 has an RSS of 243; Making is a 25.1 difference. Taking a look at Model 3 we can see we have an RSS of 188.
